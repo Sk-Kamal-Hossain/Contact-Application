@@ -25,7 +25,7 @@ const Home = () => {
 
     const fetchContacts = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/contacts');
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/contacts`);
             setContacts(response.data);
         } catch (error) {
             console.error('Error fetching contacts:', error);
@@ -71,7 +71,7 @@ const Home = () => {
     const handleEditSave = async (updatedData) => {
         if (!editContact) return;
         try {
-            const response = await axios.put(`http://localhost:5000/contacts/${editContact.id}`, updatedData);
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/contacts/${editContact.id}`, updatedData);
             setContacts(contacts.map(c => c.id === editContact.id ? response.data : c));
             setEditContact(null);
         } catch (error) {
@@ -81,7 +81,7 @@ const Home = () => {
 
     const handleDeleteConfirm = async (contact) => {
         try {
-            await axios.delete(`http://localhost:5000/contacts/${contact.id}`);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/contacts/${contact.id}`);
             setContacts(contacts.filter(c => c.id !== contact.id));
             setDeleteContact(null);
         } catch (error) {

@@ -8,7 +8,7 @@ const AddContact = () => {
 
     const handleSave = async (data) => {
         try {
-            await axios.post('http://localhost:5000/contacts', data);
+            await axios.post(`${import.meta.env.VITE_API_URL}/contacts`, data);
             navigate('/');
         } catch (error) {
             console.error('Error adding contact:', error);
